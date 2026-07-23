@@ -1,4 +1,4 @@
-package com.example.helloapp
+package com.hadiyarajesh.composetemplate
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
