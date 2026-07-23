@@ -17,12 +17,13 @@ jobs:
         with:
           # Full history so Spotless `ratchetFrom origin/main` can diff against the base branch.
           fetch-depth: 0
+
       - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
           java-version: "21"
           distribution: "temurin"
-          cache: gradle # Enables Gradle caching for faster builds
+          cache: gradle
 
       - name: Print project directory content
         run: |
@@ -40,7 +41,6 @@ jobs:
       - name: Run unit tests
         run: ./gradlew test
 
-      # Upload test reports only if the test step fails
       - name: Archive test reports
         uses: actions/upload-artifact@v7
         if: failure()
@@ -48,11 +48,12 @@ jobs:
           name: test-reports
           path: |
             ./**/build/reports/
-            - name: Build debug APK
+
+      - name: Build debug APK
         run: ./gradlew assembleDebug
 
-       - name: Upload APK artifact
-         uses: actions/upload-artifact@v4
-         with:
-           name: app-debug
-           path: app/build/outputs/apk/debug/*.apk
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/*.apk
