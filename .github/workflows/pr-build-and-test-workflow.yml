@@ -43,7 +43,7 @@ jobs:
 
       # Upload test reports only if the test step fails
       - name: Archive test reports
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: test-reports
